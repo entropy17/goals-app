@@ -1,7 +1,19 @@
 version: "3.8"
 services:
-  # frontend:
-  # backend:
+  frontend:
+  backend:
+    build: ./backend
+    ports: 
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+    depends_on:
+      - mongodb
     
   mongodb:
     image: "mongo"
@@ -12,5 +24,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
       
 volumes:
-  data: 
+  data:
+  logs:
     

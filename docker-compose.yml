@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  # frontend:
+  # backend:
+    
+  mongodb:
+    image: "mongo"
+    volumes: 
+      - data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/mongodb_username
+      - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/mongodb_password
+    secrets:
+      - mongodb_username
+      - mongodb_password
+      
+secrets:
+  mongodb_username:
+    external: true
+  mongodb_password:
+    external: true
+volumes:
+  data: 
+    
